@@ -27,5 +27,13 @@ public class Main {
         // System.out.println("Actualizando la vista después de modificar el modelo...");
         controlador.actualizarVista();
 
+        System.out.println("-----------------------");
+        System.out.println("Agregando más estudiantes y mostrando la lista completa...");
+
+
+        controlador.agregarEstudiante(new Estudiante("Carlos Gómez", 19));
+        controlador.agregarEstudiante(new Estudiante("Ana Martínez", 21)); 
+        controlador.agregarEstudiante(new Estudiante("Luis Fernández", 20));
+        controlador.mostrarTodosLosEstudiantes();
     }
 }
