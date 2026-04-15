@@ -4,41 +4,36 @@ import java.sql.Connection;
 
 import com.uniajc.config.ConexionPostgresDatabase;
 import com.uniajc.controlador.ControladorEstudiante;
+import com.uniajc.dao.EstudianteDao;
 import com.uniajc.modelo.Estudiante;
+import com.uniajc.servicios.EstudianteService;
 import com.uniajc.vista.VistaEstudiante;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Practica MVC - UNIAJC");
+        System.out.println("------------------------------");
+        System.out.println("Practica MVC - Sistema Académico UNIAJC");
+        System.out.println("------------------------------");
 
-        ConexionPostgresDatabase.getConnection();
+        // 1. Crear la instancia de la vista
+        VistaEstudiante vistaEstudiante = new VistaEstudiante();
 
-        // // System.out.println("Creando el modelo...");
-        // Estudiante estudiante = new Estudiante("Juan Perez", 20);
-        
-        // // System.out.println("Creando la vista...");
-        // VistaEstudiante vista = new VistaEstudiante();
+        // 2. Crear la instancia del dao
+        EstudianteDao estudianteDao = new EstudianteDao();
 
-        // // System.out.println("Creando el controlador...");
-        // ControladorEstudiante controlador = new ControladorEstudiante(estudiante, vista);
+        // 3. Crear la instancia del servicio
+        EstudianteService estudianteService = new EstudianteService(estudianteDao);
 
-        // // System.out.println("Actualizando la vista...");
-        // controlador.actualizarVista();
-        
-        // // System.out.println("Modificando el modelo...");
-        // estudiante.setNombre("María López");
-        // estudiante.setEdad(22);
+        // 4. Crear la instancia del controlador
+        ControladorEstudiante controladorEstudiante = new ControladorEstudiante(vistaEstudiante, estudianteService);
 
-        // // System.out.println("Actualizando la vista después de modificar el modelo...");
-        // controlador.actualizarVista();
+        // Probamos la ejeccucion del flujo de registro de un estudiante
 
-        // System.out.println("-----------------------");
-        // System.out.println("Agregando más estudiantes y mostrando la lista completa...");
+        controladorEstudiante.mostrarTodosLosEstudiantes();
 
+        controladorEstudiante.registrarEstudiante();
 
-        // controlador.agregarEstudiante(new Estudiante("Carlos Gómez", 19));
-        // controlador.agregarEstudiante(new Estudiante("Ana Martínez", 21)); 
-        // controlador.agregarEstudiante(new Estudiante("Luis Fernández", 20));
-        // controlador.mostrarTodosLosEstudiantes();
+        controladorEstudiante.mostrarTodosLosEstudiantes();
+
     }
 }
