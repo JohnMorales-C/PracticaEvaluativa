@@ -1,14 +1,28 @@
 package com.uniajc.modelo;
 
 public class Estudiante {
+
+    private Integer id;
     private String nombre;
     private String apellido;
     private String correo;
 
-    public Estudiante(String nombre, String apellido, String correo) {
+    public Estudiante() {
+    }
+
+    public Estudiante(Integer id, String nombre, String apellido, String correo) {
+        this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+    
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNombre() {

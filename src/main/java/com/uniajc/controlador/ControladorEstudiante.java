@@ -4,47 +4,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.uniajc.modelo.Estudiante;
+import com.uniajc.servicios.EstudianteService;
 import com.uniajc.vista.VistaEstudiante;
 
 public class ControladorEstudiante {
 
-    private Estudiante estudiante;
-    private List<Estudiante> estudiantes; // Para manejar múltiples estudiantes
-    private VistaEstudiante vista;
+    private VistaEstudiante vistaEstudiante;
+    private EstudianteService estudianteService;
 
-    public ControladorEstudiante(Estudiante estudiante, VistaEstudiante vista) {
-        this.estudiante = estudiante;
-        this.vista = vista;
-        this.estudiantes = new ArrayList<Estudiante>(); // Inicializar la lista de estudiantes
+    public ControladorEstudiante(VistaEstudiante vistaEstudiante, EstudianteService estudianteService) {
+        this.vistaEstudiante = vistaEstudiante;
+        this.estudianteService = estudianteService;
     }
 
-    public Estudiante getEstudiante() {
-        return estudiante;
-    }
+    public void registrarEstudiante() {
+        // Lógica para registrar un estudiante
 
-    public void setEstudiante(Estudiante estudiante) {
-        this.estudiante = estudiante;
-    }
+        Estudiante nuevoEstudiante = vistaEstudiante.solicitarDatosEstudiante();
 
-    public VistaEstudiante getVista() {
-        return vista;
-    }
-
-    public void setVista(VistaEstudiante vista) {
-        this.vista = vista;
-    }
-
-    public void agregarEstudiante(Estudiante estudiante) {
-        estudiantes.add(estudiante);
-        System.out.println("Estudiante agregado: " + estudiante.getNombre());
-    }
-
-    public void actualizarVista() {
-        vista.mostrarDetallesEstudiante(estudiante);
+        estudianteService.registrarEstudiante(nuevoEstudiante);
+        vistaEstudiante.mostrarMensaje("Estudiante registrado exitosamente.");       
     }
 
     public void mostrarTodosLosEstudiantes() {
-        vista.mostrarTodosLosEstudiantes(estudiantes);
+        // Lógica para mostrar todos los estudiantes
+        vistaEstudiante.mostrarTodosLosEstudiantes(estudianteService.mostrarTodosLosEstudiantes());
     }
 
 }
