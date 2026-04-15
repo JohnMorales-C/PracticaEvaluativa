@@ -11,49 +11,29 @@ import java.util.Properties;
 
 public class ConexionPostgresDatabase {
 
-    private static Connection connection = null;
+    private static final Properties properties = new Properties();
 
-    public static Connection getConnection() {
-        // Usamos un objeto Properties para cargar los parámetros de conexión desde un archivo de configuración
-        Properties properties = new Properties();
-        if (connection == null) {
-            try {
-                // Cargar las propiedades desde el archivo config-postgres.properties
-                properties.load(new FileInputStream(new File("config.properties")));
-
-                // Definir los parámetros de conexión
-                String url = properties.getProperty("db.url");
-                
-                System.out.println("URL de conexión: " + url); // Imprime la URL para verificar que se está leyendo correctamente
-
-                String user = properties.getProperty("db.user");
-                String password = properties.getProperty("db.password");
-                
-                // Establecer la conexión
-                connection = DriverManager.getConnection(url, user, password);
-                System.out.println("Conexión a base de datos exitosa.");
-            } catch (SQLException error) {
-                // System.out.println("Failed to establish database connection. " + error.getMessage());
-                error.printStackTrace();
-            } catch (FileNotFoundException error) {
-                error.printStackTrace();
-            } catch (IOException error) {
-                error.printStackTrace();
-            }
+    static {
+        // Cargamos las propiedades una sola vez al inicio de la aplicación
+        try (FileInputStream configuracion = new FileInputStream(new File("config.properties"))) {
+            properties.load(configuracion);
+        } catch (IOException e) {
+            System.err.println("CRITICAL: Failed to load config.properties. " + e.getMessage());
         }
-        return connection;
     }
 
-    public static void closeConnection() {
-        if (connection != null) {
-            try {
-                connection.close();
-                System.out.println("Database connection closed successfully.");
-            } catch (SQLException error) {
-                error.printStackTrace();
-                System.out.println("Failed to close database connection. " + error.getMessage());
-            }
+    public static Connection getConnection() throws SQLException {
+   
+        // Definir los parámetros de conexión
+        String url = properties.getProperty("db.url");
+        String user = properties.getProperty("db.user");
+        String password = properties.getProperty("db.password");
+    
+        if (url == null || user == null) {
+            throw new IllegalStateException("Base de datos configurada incorrectamente. Verifique que db.url y db.user estén presentes en config.properties.");
         }
+        
+        return DriverManager.getConnection(url, user, password);         
     }
 
 }
