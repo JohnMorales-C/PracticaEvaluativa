@@ -70,13 +70,70 @@ public class EstudianteDao {
     // obtenerEstudiantePorId(int id)
     // SELECT id, name, lastname, email FROM "practica-mvc".estudiantes WHERE id = 2;
 
+    public Estudiante obtenerEstudiantePorId(int id) {
+        String sql = "SELECT id, name, lastname, email FROM \"practica-mvc\".estudiantes WHERE id = ?;";
+
+        try (Connection conn = ConexionPostgresDatabase.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                Estudiante estudiante = new Estudiante();
+                estudiante.setId(rs.getInt("id"));
+                estudiante.setNombre(rs.getString("name"));
+                estudiante.setApellido(rs.getString("lastname"));
+                estudiante.setCorreo(rs.getString("email"));
+                return estudiante;
+            }
+
+        } catch (SQLException error) {
+            error.printStackTrace();
+        }
+
+        return null;
+    }
+
 
     // actualizarEstudiante(Estudiante estudiante)
     // UPDATE "practica-mvc".estudiantes
     // SET email = 'emailactualizado@example.com', lastname = 'nuevoapellido'
     // WHERE id = 2;
 
+    public void actualizarEstudiante(Estudiante estudiante) {
+        String sql = "UPDATE \"practica-mvc\".estudiantes SET name = ?, lastname = ?, email = ? WHERE id = ?;";
+
+        try (Connection conn = ConexionPostgresDatabase.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, estudiante.getNombre());
+            pstmt.setString(2, estudiante.getApellido());
+            pstmt.setString(3, estudiante.getCorreo());
+            pstmt.setInt(4, estudiante.getId());
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException error) {
+            error.printStackTrace();
+        }
+    }
+
 
     // eliminarEstudiante(int id)
     // DELETE FROM "practica-mvc".estudiantes WHERE id = 1;
+
+    public void eliminarEstudiante(int id) {
+        String sql = "DELETE FROM \"practica-mvc\".estudiantes WHERE id = ?;";
+
+        try (Connection conn = ConexionPostgresDatabase.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+
+        } catch (SQLException error) {
+            error.printStackTrace();
+        }
+    }
 }
