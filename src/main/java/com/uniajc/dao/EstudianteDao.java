@@ -17,7 +17,7 @@ public class EstudianteDao {
     // guardarEstudiante(Estudiante estudiante)
     // INSERT INTO "practica-mvc".estudiantes (name, lastname, email) VALUES ('Gabriel', 'Perez', 'pepito@email.com');
     public void guardarEstudiante(Estudiante estudiante) {
-        String sql = "INSERT INTO \"practica-mvc\".estudiantes (name, lastname, email) VALUES (?, ?, ?);";
+        String sql = "INSERT INTO estudiantes (name, lastname, email) VALUES (?, ?, ?);";
 
         try (Connection conn = ConexionPostgresDatabase.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -25,8 +25,6 @@ public class EstudianteDao {
             pstmt.setString(1, estudiante.getNombre());
             pstmt.setString(2, estudiante.getApellido());
             pstmt.setString(3, estudiante.getCorreo());
-
-            
             pstmt.executeUpdate();
 
         } catch (SQLException error) {
@@ -36,12 +34,12 @@ public class EstudianteDao {
 
 
     // obtenerTodosLosEstudiantes()
-    // SELECT id, name, lastname, email FROM "practica-mvc".estudiantes;
+    // SELECT id, name, lastname, email FROM estudiantes;
 
     public List<Estudiante> obtenerTodosLosEstudiantes() {
         List<Estudiante> estudiantes = new ArrayList<Estudiante>();
         
-        String sql = "SELECT id, name, lastname, email FROM \"practica-mvc\".estudiantes;";
+        String sql = "SELECT id, name, lastname, email FROM estudiantes;";
 
         try (Connection conn = ConexionPostgresDatabase.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -71,7 +69,7 @@ public class EstudianteDao {
     // SELECT id, name, lastname, email FROM "practica-mvc".estudiantes WHERE id = 2;
 
     public Estudiante obtenerEstudiantePorId(int id) {
-        String sql = "SELECT id, name, lastname, email FROM \"practica-mvc\".estudiantes WHERE id = ?;";
+        String sql = "SELECT id, name, lastname, email FROM estudiantes WHERE id = ?;";
 
         try (Connection conn = ConexionPostgresDatabase.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -102,7 +100,7 @@ public class EstudianteDao {
     // WHERE id = 2;
 
     public void actualizarEstudiante(Estudiante estudiante) {
-        String sql = "UPDATE \"practica-mvc\".estudiantes SET name = ?, lastname = ?, email = ? WHERE id = ?;";
+        String sql = "UPDATE estudiantes SET name = ?, lastname = ?, email = ? WHERE id = ?;";
 
         try (Connection conn = ConexionPostgresDatabase.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -124,7 +122,7 @@ public class EstudianteDao {
     // DELETE FROM "practica-mvc".estudiantes WHERE id = 1;
 
     public void eliminarEstudiante(int id) {
-        String sql = "DELETE FROM \"practica-mvc\".estudiantes WHERE id = ?;";
+        String sql = "DELETE FROM estudiantes WHERE id = ?;";
 
         try (Connection conn = ConexionPostgresDatabase.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

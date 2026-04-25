@@ -17,19 +17,16 @@ public class MateriaService {
         if (materia == null) {
             throw new IllegalArgumentException("La materia no puede ser nula.");
         }
-
         if (materia.getNombreMateria() == null || materia.getNombreMateria().trim().isEmpty()) {
             throw new IllegalArgumentException("El nombre de la materia es obligatorio.");
         }
-
         if (materia.getCreditos() == null || materia.getCreditos() <= 0) {
-            throw new IllegalArgumentException("Los créditos deben ser mayores a 0.");
+            throw new IllegalArgumentException("Los créditos deben ser mayor a 0.");
         }
-
         materiaDao.guardarMateria(materia);
     }
 
-    public List<Materia> obtenerTodasLasMaterias() {
+    public List<Materia> mostrarTodasLasMaterias() {
         return materiaDao.obtenerTodasLasMaterias();
     }
 
@@ -44,15 +41,6 @@ public class MateriaService {
         if (materia == null || materia.getIdMateria() == null || materia.getIdMateria() <= 0) {
             throw new IllegalArgumentException("El ID de la materia es requerido y debe ser mayor a 0.");
         }
-
-        if (materia.getNombreMateria() == null || materia.getNombreMateria().trim().isEmpty()) {
-            throw new IllegalArgumentException("El nombre de la materia es obligatorio.");
-        }
-
-        if (materia.getCreditos() == null || materia.getCreditos() <= 0) {
-            throw new IllegalArgumentException("Los créditos deben ser mayores a 0.");
-        }
-
         materiaDao.actualizarMateria(materia);
     }
 

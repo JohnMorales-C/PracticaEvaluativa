@@ -14,32 +14,33 @@ public class VistaDocente {
     }
 
     public Docente solicitarDatosDocente() {
-        System.out.println("Registrando los datos del docente...");
+        System.out.println("\nRegistrando los datos del docente...");
 
-        System.out.println("Ingrese el nombre del docente:");
+        System.out.print("Ingrese el nombre del docente: ");
         String nombre = scanner.nextLine();
 
-        System.out.println("Ingrese la especialidad del docente:");
+        System.out.print("Ingrese la especialidad del docente: ");
         String especialidad = scanner.nextLine();
 
         return new Docente(0, nombre, especialidad);
     }
 
     public void mostrarDetallesDocente(Docente docente) {
-        System.out.println("ID: " + docente.getIdDocente());
+        System.out.println("------------------------------");
+        System.out.println("Id: " + docente.getIdDocente());
         System.out.println("Nombre: " + docente.getNombre());
         System.out.println("Especialidad: " + docente.getEspecialidad());
-        System.out.println();
     }
 
     public void mostrarTodosLosDocentes(List<Docente> docentes) {
-        System.out.println("Lista de Docentes: ");
-        if (docentes.isEmpty()) {
-            System.out.println("No hay docentes registrados.");
-        } else {
-            for (Docente docente : docentes) {
-                mostrarDetallesDocente(docente);
-            }
+        System.out.println("\nLista de Docentes:");
+        if (docentes == null || docentes.isEmpty()) {
+            System.out.println("No hay docentes registrados todavía.");
+            return;
+        }
+
+        for (Docente docente : docentes) {
+            mostrarDetallesDocente(docente);
         }
     }
 

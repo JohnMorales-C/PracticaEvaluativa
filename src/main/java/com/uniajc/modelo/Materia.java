@@ -38,5 +38,4 @@ public class Materia {
     public void setCreditos(Integer creditos) {
         this.creditos = creditos;
     }
-
 }

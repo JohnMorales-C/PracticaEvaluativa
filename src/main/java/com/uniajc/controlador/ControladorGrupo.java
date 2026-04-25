@@ -23,16 +23,6 @@ public class ControladorGrupo {
     }
 
     public void mostrarTodosLosGrupos() {
-        List<Grupo> grupos = grupoService.obtenerTodosLosGrupos();
-        vistaGrupo.mostrarTodosLosGrupos(grupos);
-    }
-
-    public void obtenerGrupoPorId(int id) {
-        Grupo grupo = grupoService.obtenerGrupoPorId(id);
-        if (grupo != null) {
-            vistaGrupo.mostrarDetallesGrupo(grupo);
-        } else {
-            vistaGrupo.mostrarMensaje("Grupo no encontrado.");
-        }
+        vistaGrupo.mostrarTodosLosGrupos(grupoService.mostrarTodosLosGrupos());
     }
 }

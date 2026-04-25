@@ -38,5 +38,4 @@ public class Docente {
     public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
     }
-
 }

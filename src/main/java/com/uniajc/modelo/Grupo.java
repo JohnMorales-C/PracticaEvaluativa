@@ -58,5 +58,4 @@ public class Grupo {
     public void setHorario(String horario) {
         this.horario = horario;
     }
-
 }

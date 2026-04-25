@@ -1,0 +1,10 @@
+# Configuración de conexión a PostgreSQL
+# Copia este archivo a config.properties y ajusta los valores según tu entorno.
+# Ejemplo de URL para Neon, Heroku o PostgreSQL local:
+# db.url=jdbc:postgresql://<host>:<puerto>/<base_de_datos>
+# db.user=<usuario>
+# db.password=<contraseña>
+
+db.url=jdbc:postgresql://localhost:5432/practica_mvc
+# db.user=postgres
+# db.password=secret

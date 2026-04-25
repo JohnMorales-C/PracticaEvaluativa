@@ -13,14 +13,13 @@ import com.uniajc.modelo.Docente;
 public class DocenteDao {
 
     public void guardarDocente(Docente docente) {
-        String sql = "INSERT INTO \"practica-mvc\".docentes (nombre, especialidad) VALUES (?, ?);";
+        String sql = "INSERT INTO docentes (nombre, especialidad) VALUES (?, ?);";
 
         try (Connection conn = ConexionPostgresDatabase.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, docente.getNombre());
             pstmt.setString(2, docente.getEspecialidad());
-
             pstmt.executeUpdate();
 
         } catch (SQLException error) {
@@ -30,8 +29,7 @@ public class DocenteDao {
 
     public List<Docente> obtenerTodosLosDocentes() {
         List<Docente> docentes = new ArrayList<>();
-
-        String sql = "SELECT id_docente, nombre, especialidad FROM \"practica-mvc\".docentes;";
+        String sql = "SELECT id_docente, nombre, especialidad FROM docentes;";
 
         try (Connection conn = ConexionPostgresDatabase.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -53,7 +51,7 @@ public class DocenteDao {
     }
 
     public Docente obtenerDocentePorId(int id) {
-        String sql = "SELECT id_docente, nombre, especialidad FROM \"practica-mvc\".docentes WHERE id_docente = ?;";
+        String sql = "SELECT id_docente, nombre, especialidad FROM docentes WHERE id_docente = ?;";
 
         try (Connection conn = ConexionPostgresDatabase.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -77,7 +75,7 @@ public class DocenteDao {
     }
 
     public void actualizarDocente(Docente docente) {
-        String sql = "UPDATE \"practica-mvc\".docentes SET nombre = ?, especialidad = ? WHERE id_docente = ?;";
+        String sql = "UPDATE docentes SET nombre = ?, especialidad = ? WHERE id_docente = ?;";
 
         try (Connection conn = ConexionPostgresDatabase.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -85,7 +83,6 @@ public class DocenteDao {
             pstmt.setString(1, docente.getNombre());
             pstmt.setString(2, docente.getEspecialidad());
             pstmt.setInt(3, docente.getIdDocente());
-
             pstmt.executeUpdate();
 
         } catch (SQLException error) {
@@ -94,7 +91,7 @@ public class DocenteDao {
     }
 
     public void eliminarDocente(int id) {
-        String sql = "DELETE FROM \"practica-mvc\".docentes WHERE id_docente = ?;";
+        String sql = "DELETE FROM docentes WHERE id_docente = ?;";
 
         try (Connection conn = ConexionPostgresDatabase.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

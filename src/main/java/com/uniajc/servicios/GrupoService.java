@@ -17,27 +17,16 @@ public class GrupoService {
         if (grupo == null) {
             throw new IllegalArgumentException("El grupo no puede ser nulo.");
         }
-
         if (grupo.getIdMateria() == null || grupo.getIdMateria() <= 0) {
-            throw new IllegalArgumentException("El ID de la materia es obligatorio y debe ser mayor a 0.");
+            throw new IllegalArgumentException("El ID de la materia es obligatorio.");
         }
-
         if (grupo.getIdDocente() == null || grupo.getIdDocente() <= 0) {
-            throw new IllegalArgumentException("El ID del docente es obligatorio y debe ser mayor a 0.");
+            throw new IllegalArgumentException("El ID del docente es obligatorio.");
         }
-
-        if (grupo.getAula() == null || grupo.getAula().trim().isEmpty()) {
-            throw new IllegalArgumentException("El aula es obligatoria.");
-        }
-
-        if (grupo.getHorario() == null || grupo.getHorario().trim().isEmpty()) {
-            throw new IllegalArgumentException("El horario es obligatorio.");
-        }
-
         grupoDao.guardarGrupo(grupo);
     }
 
-    public List<Grupo> obtenerTodosLosGrupos() {
+    public List<Grupo> mostrarTodosLosGrupos() {
         return grupoDao.obtenerTodosLosGrupos();
     }
 
@@ -52,15 +41,6 @@ public class GrupoService {
         if (grupo == null || grupo.getIdGrupo() == null || grupo.getIdGrupo() <= 0) {
             throw new IllegalArgumentException("El ID del grupo es requerido y debe ser mayor a 0.");
         }
-
-        if (grupo.getIdMateria() == null || grupo.getIdMateria() <= 0) {
-            throw new IllegalArgumentException("El ID de la materia es obligatorio y debe ser mayor a 0.");
-        }
-
-        if (grupo.getIdDocente() == null || grupo.getIdDocente() <= 0) {
-            throw new IllegalArgumentException("El ID del docente es obligatorio y debe ser mayor a 0.");
-        }
-
         grupoDao.actualizarGrupo(grupo);
     }
 

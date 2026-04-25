@@ -17,19 +17,13 @@ public class DocenteService {
         if (docente == null) {
             throw new IllegalArgumentException("El docente no puede ser nulo.");
         }
-
         if (docente.getNombre() == null || docente.getNombre().trim().isEmpty()) {
             throw new IllegalArgumentException("El nombre del docente es obligatorio.");
         }
-
-        if (docente.getEspecialidad() == null || docente.getEspecialidad().trim().isEmpty()) {
-            throw new IllegalArgumentException("La especialidad del docente es obligatoria.");
-        }
-
         docenteDao.guardarDocente(docente);
     }
 
-    public List<Docente> obtenerTodosLosDocentes() {
+    public List<Docente> mostrarTodosLosDocentes() {
         return docenteDao.obtenerTodosLosDocentes();
     }
 
@@ -44,11 +38,6 @@ public class DocenteService {
         if (docente == null || docente.getIdDocente() == null || docente.getIdDocente() <= 0) {
             throw new IllegalArgumentException("El ID del docente es requerido y debe ser mayor a 0.");
         }
-
-        if (docente.getNombre() == null || docente.getNombre().trim().isEmpty()) {
-            throw new IllegalArgumentException("El nombre del docente es obligatorio.");
-        }
-
         docenteDao.actualizarDocente(docente);
     }
 

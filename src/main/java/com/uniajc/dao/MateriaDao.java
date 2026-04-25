@@ -13,14 +13,13 @@ import com.uniajc.modelo.Materia;
 public class MateriaDao {
 
     public void guardarMateria(Materia materia) {
-        String sql = "INSERT INTO \"practica-mvc\".materias (nombre_materia, creditos) VALUES (?, ?);";
+        String sql = "INSERT INTO materias (nombre_materia, creditos) VALUES (?, ?);";
 
         try (Connection conn = ConexionPostgresDatabase.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, materia.getNombreMateria());
             pstmt.setInt(2, materia.getCreditos());
-
             pstmt.executeUpdate();
 
         } catch (SQLException error) {
@@ -30,8 +29,7 @@ public class MateriaDao {
 
     public List<Materia> obtenerTodasLasMaterias() {
         List<Materia> materias = new ArrayList<>();
-
-        String sql = "SELECT id_materia, nombre_materia, creditos FROM \"practica-mvc\".materias;";
+        String sql = "SELECT id_materia, nombre_materia, creditos FROM materias;";
 
         try (Connection conn = ConexionPostgresDatabase.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -53,7 +51,7 @@ public class MateriaDao {
     }
 
     public Materia obtenerMateriaPorId(int id) {
-        String sql = "SELECT id_materia, nombre_materia, creditos FROM \"practica-mvc\".materias WHERE id_materia = ?;";
+        String sql = "SELECT id_materia, nombre_materia, creditos FROM materias WHERE id_materia = ?;";
 
         try (Connection conn = ConexionPostgresDatabase.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -77,7 +75,7 @@ public class MateriaDao {
     }
 
     public void actualizarMateria(Materia materia) {
-        String sql = "UPDATE \"practica-mvc\".materias SET nombre_materia = ?, creditos = ? WHERE id_materia = ?;";
+        String sql = "UPDATE materias SET nombre_materia = ?, creditos = ? WHERE id_materia = ?;";
 
         try (Connection conn = ConexionPostgresDatabase.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -85,7 +83,6 @@ public class MateriaDao {
             pstmt.setString(1, materia.getNombreMateria());
             pstmt.setInt(2, materia.getCreditos());
             pstmt.setInt(3, materia.getIdMateria());
-
             pstmt.executeUpdate();
 
         } catch (SQLException error) {
@@ -94,7 +91,7 @@ public class MateriaDao {
     }
 
     public void eliminarMateria(int id) {
-        String sql = "DELETE FROM \"practica-mvc\".materias WHERE id_materia = ?;";
+        String sql = "DELETE FROM materias WHERE id_materia = ?;";
 
         try (Connection conn = ConexionPostgresDatabase.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

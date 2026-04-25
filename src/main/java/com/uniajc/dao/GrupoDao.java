@@ -13,7 +13,7 @@ import com.uniajc.modelo.Grupo;
 public class GrupoDao {
 
     public void guardarGrupo(Grupo grupo) {
-        String sql = "INSERT INTO \"practica-mvc\".grupos (id_materia, id_docente, aula, horario) VALUES (?, ?, ?, ?);";
+        String sql = "INSERT INTO grupos (id_materia, id_docente, aula, horario) VALUES (?, ?, ?, ?);";
 
         try (Connection conn = ConexionPostgresDatabase.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -22,7 +22,6 @@ public class GrupoDao {
             pstmt.setInt(2, grupo.getIdDocente());
             pstmt.setString(3, grupo.getAula());
             pstmt.setString(4, grupo.getHorario());
-
             pstmt.executeUpdate();
 
         } catch (SQLException error) {
@@ -32,8 +31,7 @@ public class GrupoDao {
 
     public List<Grupo> obtenerTodosLosGrupos() {
         List<Grupo> grupos = new ArrayList<>();
-
-        String sql = "SELECT id_grupo, id_materia, id_docente, aula, horario FROM \"practica-mvc\".grupos;";
+        String sql = "SELECT id_grupo, id_materia, id_docente, aula, horario FROM grupos;";
 
         try (Connection conn = ConexionPostgresDatabase.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -57,7 +55,7 @@ public class GrupoDao {
     }
 
     public Grupo obtenerGrupoPorId(int id) {
-        String sql = "SELECT id_grupo, id_materia, id_docente, aula, horario FROM \"practica-mvc\".grupos WHERE id_grupo = ?;";
+        String sql = "SELECT id_grupo, id_materia, id_docente, aula, horario FROM grupos WHERE id_grupo = ?;";
 
         try (Connection conn = ConexionPostgresDatabase.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -83,7 +81,7 @@ public class GrupoDao {
     }
 
     public void actualizarGrupo(Grupo grupo) {
-        String sql = "UPDATE \"practica-mvc\".grupos SET id_materia = ?, id_docente = ?, aula = ?, horario = ? WHERE id_grupo = ?;";
+        String sql = "UPDATE grupos SET id_materia = ?, id_docente = ?, aula = ?, horario = ? WHERE id_grupo = ?;";
 
         try (Connection conn = ConexionPostgresDatabase.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -93,7 +91,6 @@ public class GrupoDao {
             pstmt.setString(3, grupo.getAula());
             pstmt.setString(4, grupo.getHorario());
             pstmt.setInt(5, grupo.getIdGrupo());
-
             pstmt.executeUpdate();
 
         } catch (SQLException error) {
@@ -102,7 +99,7 @@ public class GrupoDao {
     }
 
     public void eliminarGrupo(int id) {
-        String sql = "DELETE FROM \"practica-mvc\".grupos WHERE id_grupo = ?;";
+        String sql = "DELETE FROM grupos WHERE id_grupo = ?;";
 
         try (Connection conn = ConexionPostgresDatabase.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

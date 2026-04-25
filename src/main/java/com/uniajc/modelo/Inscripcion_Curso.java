@@ -58,5 +58,4 @@ public class Inscripcion_Curso {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-
 }

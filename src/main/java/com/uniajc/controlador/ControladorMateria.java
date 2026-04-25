@@ -23,16 +23,6 @@ public class ControladorMateria {
     }
 
     public void mostrarTodasLasMaterias() {
-        List<Materia> materias = materiaService.obtenerTodasLasMaterias();
-        vistaMateria.mostrarTodasLasMaterias(materias);
-    }
-
-    public void obtenerMateriaPorId(int id) {
-        Materia materia = materiaService.obtenerMateriaPorId(id);
-        if (materia != null) {
-            vistaMateria.mostrarDetallesMateria(materia);
-        } else {
-            vistaMateria.mostrarMensaje("Materia no encontrada.");
-        }
+        vistaMateria.mostrarTodasLasMaterias(materiaService.mostrarTodasLasMaterias());
     }
 }

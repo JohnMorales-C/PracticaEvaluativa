@@ -14,40 +14,41 @@ public class VistaGrupo {
     }
 
     public Grupo solicitarDatosGrupo() {
-        System.out.println("Registrando los datos del grupo...");
+        System.out.println("\nRegistrando los datos del grupo...");
 
-        System.out.println("Ingrese el ID de la materia:");
+        System.out.print("Ingrese el ID de la materia: ");
         int idMateria = Integer.parseInt(scanner.nextLine());
 
-        System.out.println("Ingrese el ID del docente:");
+        System.out.print("Ingrese el ID del docente: ");
         int idDocente = Integer.parseInt(scanner.nextLine());
 
-        System.out.println("Ingrese el aula:");
+        System.out.print("Ingrese el aula: ");
         String aula = scanner.nextLine();
 
-        System.out.println("Ingrese el horario:");
+        System.out.print("Ingrese el horario: ");
         String horario = scanner.nextLine();
 
         return new Grupo(0, idMateria, idDocente, aula, horario);
     }
 
     public void mostrarDetallesGrupo(Grupo grupo) {
-        System.out.println("ID Grupo: " + grupo.getIdGrupo());
-        System.out.println("ID Materia: " + grupo.getIdMateria());
-        System.out.println("ID Docente: " + grupo.getIdDocente());
+        System.out.println("------------------------------");
+        System.out.println("Id: " + grupo.getIdGrupo());
+        System.out.println("Id Materia: " + grupo.getIdMateria());
+        System.out.println("Id Docente: " + grupo.getIdDocente());
         System.out.println("Aula: " + grupo.getAula());
         System.out.println("Horario: " + grupo.getHorario());
-        System.out.println();
     }
 
     public void mostrarTodosLosGrupos(List<Grupo> grupos) {
-        System.out.println("Lista de Grupos: ");
-        if (grupos.isEmpty()) {
-            System.out.println("No hay grupos registrados.");
-        } else {
-            for (Grupo grupo : grupos) {
-                mostrarDetallesGrupo(grupo);
-            }
+        System.out.println("\nLista de Grupos:");
+        if (grupos == null || grupos.isEmpty()) {
+            System.out.println("No hay grupos registrados todavía.");
+            return;
+        }
+
+        for (Grupo grupo : grupos) {
+            mostrarDetallesGrupo(grupo);
         }
     }
 

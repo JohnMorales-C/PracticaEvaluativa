@@ -14,32 +14,33 @@ public class VistaMateria {
     }
 
     public Materia solicitarDatosMateria() {
-        System.out.println("Registrando los datos de la materia...");
+        System.out.println("\nRegistrando los datos de la materia...");
 
-        System.out.println("Ingrese el nombre de la materia:");
+        System.out.print("Ingrese el nombre de la materia: ");
         String nombreMateria = scanner.nextLine();
 
-        System.out.println("Ingrese los créditos de la materia:");
+        System.out.print("Ingrese los créditos de la materia: ");
         int creditos = Integer.parseInt(scanner.nextLine());
 
         return new Materia(0, nombreMateria, creditos);
     }
 
     public void mostrarDetallesMateria(Materia materia) {
-        System.out.println("ID: " + materia.getIdMateria());
+        System.out.println("------------------------------");
+        System.out.println("Id: " + materia.getIdMateria());
         System.out.println("Nombre: " + materia.getNombreMateria());
         System.out.println("Créditos: " + materia.getCreditos());
-        System.out.println();
     }
 
     public void mostrarTodasLasMaterias(List<Materia> materias) {
-        System.out.println("Lista de Materias: ");
-        if (materias.isEmpty()) {
-            System.out.println("No hay materias registradas.");
-        } else {
-            for (Materia materia : materias) {
-                mostrarDetallesMateria(materia);
-            }
+        System.out.println("\nLista de Materias:");
+        if (materias == null || materias.isEmpty()) {
+            System.out.println("No hay materias registradas todavía.");
+            return;
+        }
+
+        for (Materia materia : materias) {
+            mostrarDetallesMateria(materia);
         }
     }
 
