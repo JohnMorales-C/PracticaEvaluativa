@@ -1,7 +1,3 @@
--- Script para crear las tablas en NEON PostgreSQL
--- Ejecuta esto en tu consola Neon o en pgAdmin
-
--- Crear esquema si no existe
 CREATE SCHEMA IF NOT EXISTS "practica-mvc";
 
 -- Tabla de Docentes
@@ -48,27 +44,4 @@ CREATE TABLE IF NOT EXISTS "practica-mvc".inscripciones (
     FOREIGN KEY (id_grupo) REFERENCES "practica-mvc".grupos(id_grupo)
 );
 
--- Datos de prueba
-INSERT INTO "practica-mvc".docentes (nombre, especialidad) 
-VALUES 
-    ('Dr. Juan Rodríguez', 'Matemáticas'),
-    ('Ing. María González', 'Programación'),
-    ('Prof. Carlos López', 'Bases de Datos');
 
-INSERT INTO "practica-mvc".materias (nombre_materia, creditos)
-VALUES
-    ('Cálculo I', 4),
-    ('Programación Java', 3),
-    ('Bases de Datos SQL', 3);
-
-INSERT INTO "practica-mvc".grupos (id_materia, id_docente, aula, horario)
-VALUES
-    (1, 1, 'A101', 'Lunes 8:00 - Viernes 10:00'),
-    (2, 2, 'B202', 'Martes 10:00 - Jueves 12:00'),
-    (3, 3, 'C303', 'Miércoles 14:00 - Viernes 16:00');
-
-INSERT INTO "practica-mvc".estudiantes (name, lastname, email)
-VALUES
-    ('Pedro', 'Gómez', 'pedro@email.com'),
-    ('Ana', 'Martínez', 'ana@email.com'),
-    ('Luis', 'Hernández', 'luis@email.com');
